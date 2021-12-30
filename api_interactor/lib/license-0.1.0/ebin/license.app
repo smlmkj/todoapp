@@ -1,0 +1,9 @@
+{application,license,
+             [{applications,[kernel,stdlib,elixir,logger,ssl,jason,common,
+                             store]},
+              {description,"license"},
+              {modules,['Elixir.Autoflow.License.Application',
+                        'Elixir.Autoflow.License.Manager']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.Autoflow.License.Application',[]}}]}.

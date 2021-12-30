@@ -1,0 +1,19 @@
+:root {
+  --hover-blue: #3763bb;
+  --pulzze-green: #78dd77;
+  --pulzze-btn-primary: #011b36;
+  --pulzze-btn-primary-font: #ffffff;
+  --pulzze-btn-primary-accent: #011b36;
+  --pulzze-btn-primary-hover: #ffffff;
+  --pulzze-btn-primary-hover-font: #011b36;
+  --pulzze-btn-primary-hover-accent: #011b36;
+  --pulzze-btn-danger: #ff0101;
+  --pulzze-btn-danger-font: #ffffff;
+  --pulzze-btn-danger-accent: #ff0101;
+  --pulzze-btn-danger-hover: #ffffff;
+  --pulzze-btn-danger-hover-font: #ff0101;
+  --pulzze-btn-danger-hover-accent: #ff0101;
+  --pulzze-btn-disabled: #cccccc;
+  --pulzze-btn-disabled-font: #ffffff;
+  --pulzze-btn-disabled-accent: #cccccc;
+}

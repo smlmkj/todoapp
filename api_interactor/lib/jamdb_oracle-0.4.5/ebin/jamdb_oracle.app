@@ -1,0 +1,12 @@
+{application,jamdb_oracle,
+             [{applications,[kernel,stdlib,elixir,ecto_sql]},
+              {description,"Erlang driver and Ecto adapter for Oracle"},
+              {modules,['Elixir.DBConnection.Query.Jamdb.Oracle.Query',
+                        'Elixir.Ecto.Adapters.Jamdb.Oracle',
+                        'Elixir.Ecto.Adapters.Jamdb.Oracle.Connection',
+                        'Elixir.Jamdb.Oracle','Elixir.Jamdb.Oracle.Query',
+                        'Elixir.String.Chars.Jamdb.Oracle.Query',jamdb_oracle,
+                        jamdb_oracle_conn,jamdb_oracle_crypt,
+                        jamdb_oracle_tns_decoder,jamdb_oracle_tns_encoder]},
+              {registered,[]},
+              {vsn,"0.4.5"}]}.
