@@ -1,2 +1,0 @@
-- Files in this dir was taken from freeradius project, which is licenced as GPLv2, refer COPYRIGHT and LICENSE file for further information.
-- WiMax VSAs are deleted
