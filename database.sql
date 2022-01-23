@@ -3,7 +3,8 @@ USE todo;
 CREATE TABLE task(
   id          BIGINT        AUTO_INCREMENT,
   title       VARCHAR(255)  NOT NULL,
-  due         DATETIME,
+  due         VARCHAR(255),
+  p_scoer     BIGINT,
   duration    BIGINT,
   importance  INT,
   created_at  TIMESTAMP     DEFAULT current_timestamp,
@@ -16,6 +17,7 @@ CREATE TABLE task(
 CREATE TABLE goal(
   id         BIGINT         AUTO_INCREMENT,
   title      VARCHAR(255)   NOT NULL,
+  priority   BIGINT,
   created_at TIMESTAMP      DEFAULT current_timestamp,
   created_by BIGINT         DEFAULT 0,
   updated_at TIMESTAMP      DEFAULT current_timestamp,
@@ -25,7 +27,7 @@ CREATE TABLE goal(
 CREATE TABLE milestone(
   id         BIGINT         AUTO_INCREMENT,
   title      VARCHAR(255)   NOT NULL,
-  due        DATETIME,
+  due        VARCHAR(255),
   created_at TIMESTAMP      DEFAULT current_timestamp,
   created_by BIGINT         DEFAULT 0,
   updated_at TIMESTAMP      DEFAULT current_timestamp,

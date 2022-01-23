@@ -90,7 +90,8 @@ export default {
       data: {
         title: '',
         milestone_id: '',
-        due: ''
+        due: '',
+        goal_priority: ''
       },
       formData: {
         date: '',
@@ -98,7 +99,6 @@ export default {
         goal_id: ''
       },
       goalList: '',
-      goal_priority: ''
     }
   },
 
@@ -131,13 +131,8 @@ export default {
     },
     submitForm() {
       this.dialog = false
-      axios
-        .post('http://localhost:3005/task-post', {
-          "due": this.data.due,
-          "milestone_id": this.data.milestone_id,
-          "goal_priority": this.goalPriority,
-          "title": this.data.title
-        })
+      console.log(this.data.due,this.data.milestone_id,this.goalPriority,this.data.title);
+      axios.post('http://localhost:3005/task-post', this.data)
         .then((res) => {
           this.response = res
         })

@@ -14,6 +14,7 @@
           v-bind="attrs"
           v-on="on"
           class="mr-16"
+          text @click="getTask"
         >
           Sort By: Importance
         </v-btn>
@@ -38,7 +39,7 @@
 </div>
 </template>
 <script>
-import axios from 'axios';
+
 export default {
   data() {
 
@@ -49,17 +50,34 @@ export default {
         { title: 'Due Date' }
 
       ],
-      tasks: "",
+      tasks: [],
 
     }
   },
-  mounted() {
-    axios.get('http://localhost:3005/task-get')
-      .then((res) => {
-        this.tasks = res.data
-      })
+  methods: {
 
+},
+mounted(){
+/* if (localStorage.getItem('tasks'))
+        {
+         this.tasks = JSON.parse(localStorage.getItem('tasks'));
+       }
+       console.log(this.tasks);
+     }
+
+*/
+
+
+},
+computed: {
+
+getTask(){
+
+const storeState =  this.$store.state.tasks
+return storeState;
+console.log("jello");
   }
-
 }
+}
+
 </script>

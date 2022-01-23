@@ -43,10 +43,6 @@ export default {
         title:`${this.$route.query.g}`
     },
 
-      valid: "",
-      firstname: "",
-      lastname: "",
-      email: "",
       toggleAddTask: false,
       tasks: "",
       milestones: ""

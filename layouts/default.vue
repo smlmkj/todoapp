@@ -53,7 +53,7 @@
                     <v-btn color="blue darken-1" text @click="dialog = false">
                       Close
                     </v-btn>
-                    <v-btn color="blue darken-1" text @click="submitGoal">
+                    <v-btn color="blue darken-1" text @click="saveData">
                       Save
                     </v-btn>
                   </v-card-actions>
@@ -112,6 +112,7 @@
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
+  {{ submitGoalRes }}
   <v-footer :absolute="!fixed" app>
     <span>&copy; {{ new Date().getFullYear() }}</span>
   </v-footer>
@@ -147,8 +148,16 @@ export default {
       ],
       goalItems: "",
       goalItemPost: {
-        name:""
+        name:"",
+        importance:""
       },
+      submitGoalRes: "",
+      milestones:[
+      ],
+      tasks:[
+      ],
+      milestoneMember:[],
+      goalMember:[],
       miniVariant: false,
       right: true,
       rightDrawer: false,
@@ -158,20 +167,97 @@ export default {
   },
   methods: {
     submitGoal() {
+      console.log( this.tasks[0].id);
+      console.log(this.milestones);
       console.log(this.goalItemPost.importance);
-      axios.post('http://localhost:3005/goals-post', this.goalItemPost)
+     axios.post('http://localhost:3005/goals-post', this.goalItemPost)
         .then((res) => {
           this.submitGoalRes = res
-        })
+       })
+
+    },
+
+    /* getGoal(){
+      this.goalItems = store.state.count.goalItems
+
+    },
+    getMilestone(){
+      this.milestones = store.state.count.milestones
+
+    },
+    getTask(){
+      this.tasks = store.state.count.tasks
+
+    },
+    getGoalMember(){
+      this.goalMember = store.state.count.goalMember
+
+    },
+    getMilestoneMember(){
+      this.milestoneMember = store.state.count.milestoneMember
+
     }
+    */
+    /* saveData(){
+    const parsedTasks = JSON.stringify(this.tasks);
+    const parsedMilestones = JSON.stringify(this.milestones);
+    const parsedGoals = JSON.stringify(this.goalItems);
+    const parsedMilestoneMembers = JSON.stringify(this.milestoneMember);
+    const parsedGoalMembers = JSON.stringify(this.goalMember);
+    localStorage.setItem('tasks', parsedTasks);
+    localStorage.setItem('milestones', parsedMilestones);
+    localStorage.setItem('goals', parsedGoals);
+    localStorage.setItem('milestoneMembers', parsedMilestoneMembers);
+    localStorage.setItem('goalMembers', parsedGoalMembers);
+    }
+    */
 
   },
-  mounted() {
+  /* mounted() {
     axios.get('http://localhost:3005/goals-get')
-      .then((res) => {
-        this.goalItems = res.data
+      .then((goalRes) => {
+        this.goalItems = goalRes.data
       })
+      axios.get('http://localhost:3005/milestone-get-all')
+        .then((milestoneRes) => {
+          this.milestones = milestoneRes.data
+        })
+        axios.get('http://localhost:3005/task-get')
+          .then((taskRes) => {
+            this.tasks = taskRes.data
+          })
+          axios.get('http://localhost:3005/milestone-member-get')
+            .then((milestoneMemberRes) => {
+              this.milestoneMember = milestoneMemberRes.data
+            })
+            axios.get('http://localhost:3005/goal-member-get')
+              .then((goalMemberRes) => {
+                this.goalMember = goalMemberRes.data
+              })
+        this.saveData();
 
-  }
+               if (localStorage.getItem('goals'))
+                         {
+                          this.cats = JSON.parse(localStorage.getItem('goals'));
+                        }
+            if (localStorage.getItem('milestones'))
+                              {
+                               this.cats = JSON.parse(localStorage.getItem('milestones'));
+                             }
+    if (localStorage.getItem('milestoneMembers'))
+                                               {
+                                                this.cats = JSON.parse(localStorage.getItem('milestoneMembers'));
+                                              }
+                                              if (localStorage.getItem('goalMembers'))
+                                                                                         {
+                                                                                          this.cats = JSON.parse(localStorage.getItem('goalMembers'));
+                                                                                        }
+*/
+mounted(){
+
+
+}
+
+
 }
 </script>
