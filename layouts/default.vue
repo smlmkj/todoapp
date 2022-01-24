@@ -2,9 +2,9 @@
 <v-app dark>
 
   <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
-    <v-list>
-      <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
 
+    <v-list>    
+      <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
         <v-list-item-content>
           <v-list-item-title v-text="item.title" />
         </v-list-item-content>
@@ -13,11 +13,11 @@
         <template v-slot:activator>
           <v-list-item-title>Goals</v-list-item-title>
         </template>
-        <v-list v-for="goal in this.goalItems" :key="goal.id">
+        <v-list v-for="goal in getGoal" :key="goal.id">
           <v-list-item :to="{path:'/goals/'+goal.id, query:{g: goal.title}}">
-              <v-list-item-content >
-                <v-list-item-title v-text="goal.title"></v-list-item-title>
-              </v-list-item-content>
+            <v-list-item-content>
+              <v-list-item-title v-text="goal.title"></v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
         </v-list>
 
@@ -70,6 +70,7 @@
           <v-list-item-title>Labels</v-list-item-title>
         </template>
       </v-list-group>
+
       <v-list-group>
         <template v-slot:activator>
           <v-list-item-title>Filters</v-list-item-title>
@@ -120,62 +121,50 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   data() {
     return {
       dialog: false,
-      clipped: false,
-      drawer: false,
-      fixed: false,
+      goalItemPost: {
+        name: '',
+        importance: ''
+      },
       items: [{
-
           title: 'Inbox',
           to: '/inbox'
         },
         {
-
           title: 'Today',
           to: '/today'
         },
         {
-
           title: 'Upcoming',
           to: '/upcoming'
         }
-
       ],
-      goalItems: "",
-      goalItemPost: {
-        name:"",
-        importance:""
-      },
-      submitGoalRes: "",
-      milestones:[
-      ],
-      tasks:[
-      ],
-      milestoneMember:[],
-      goalMember:[],
+      clipped: false,
+      drawer: false,
+      fixed: false,
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Success'
+      title: 'Success',
+      tasks: {
+        title: ''
+      }
     }
-
   },
   methods: {
     submitGoal() {
-      console.log( this.tasks[0].id);
-      console.log(this.milestones);
-      console.log(this.goalItemPost.importance);
-     axios.post('http://localhost:3005/goals-post', this.goalItemPost)
-        .then((res) => {
-          this.submitGoalRes = res
-       })
-
-    },
+      console.log(this.tasks[0].id)
+      console.log(this.milestones)
+      console.log(this.goalItemPost.importance)
+      axios.post('http://localhost:3005/goals-post', this.goalItemPost).then(res => {
+        this.submitGoalRes = res
+      })
+    }
 
     /* getGoal(){
       this.goalItems = store.state.count.goalItems
@@ -211,53 +200,56 @@ export default {
     localStorage.setItem('goalMembers', parsedGoalMembers);
     }
     */
-
   },
   /* mounted() {
-    axios.get('http://localhost:3005/goals-get')
-      .then((goalRes) => {
-        this.goalItems = goalRes.data
-      })
-      axios.get('http://localhost:3005/milestone-get-all')
-        .then((milestoneRes) => {
-          this.milestones = milestoneRes.data
+      axios.get('http://localhost:3005/goals-get')
+        .then((goalRes) => {
+          this.goalItems = goalRes.data
         })
-        axios.get('http://localhost:3005/task-get')
-          .then((taskRes) => {
-            this.tasks = taskRes.data
+        axios.get('http://localhost:3005/milestone-get-all')
+          .then((milestoneRes) => {
+            this.milestones = milestoneRes.data
           })
-          axios.get('http://localhost:3005/milestone-member-get')
-            .then((milestoneMemberRes) => {
-              this.milestoneMember = milestoneMemberRes.data
+          axios.get('http://localhost:3005/task-get')
+            .then((taskRes) => {
+              this.tasks = taskRes.data
             })
-            axios.get('http://localhost:3005/goal-member-get')
-              .then((goalMemberRes) => {
-                this.goalMember = goalMemberRes.data
+            axios.get('http://localhost:3005/milestone-member-get')
+              .then((milestoneMemberRes) => {
+                this.milestoneMember = milestoneMemberRes.data
               })
-        this.saveData();
+              axios.get('http://localhost:3005/goal-member-get')
+                .then((goalMemberRes) => {
+                  this.goalMember = goalMemberRes.data
+                })
+          this.saveData();
 
-               if (localStorage.getItem('goals'))
-                         {
-                          this.cats = JSON.parse(localStorage.getItem('goals'));
-                        }
-            if (localStorage.getItem('milestones'))
-                              {
-                               this.cats = JSON.parse(localStorage.getItem('milestones'));
-                             }
-    if (localStorage.getItem('milestoneMembers'))
-                                               {
-                                                this.cats = JSON.parse(localStorage.getItem('milestoneMembers'));
-                                              }
-                                              if (localStorage.getItem('goalMembers'))
-                                                                                         {
-                                                                                          this.cats = JSON.parse(localStorage.getItem('goalMembers'));
-                                                                                        }
-*/
-mounted(){
+                 if (localStorage.getItem('goals'))
+                           {
+                            this.cats = JSON.parse(localStorage.getItem('goals'));
+                          }
+              if (localStorage.getItem('milestones'))
+                                {
+                                 this.cats = JSON.parse(localStorage.getItem('milestones'));
+                               }
+      if (localStorage.getItem('milestoneMembers'))
+                                                 {
+                                                  this.cats = JSON.parse(localStorage.getItem('milestoneMembers'));
+                                                }
+                                                if (localStorage.getItem('goalMembers'))
+                                                                                           {
+                                                                                            this.cats = JSON.parse(localStorage.getItem('goalMembers'));
+                                                                                          }
+  */
+  mounted() {
+    this.$store.dispatch('getGoalInfo')
+  },
+  computed: {
+    getGoal() {
+      const storeState = this.$store.state.goalItems
 
-
-}
-
-
+      return storeState
+    }
+  }
 }
 </script>

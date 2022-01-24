@@ -5,16 +5,18 @@
     <v-spacer></v-spacer>
     <AddButton />
   </v-app-bar>
-  {{this.milestones}}
-  <v-list-group v-for="(milestone) in milestones" :key="milestone.id" :value="true">
+  {{this.getMember}}</br></br>
+  Tasks: {{this.test1}}
+  <v-list-group v-for="(milestone) in getMember" :key="milestone.id" :value="true" v-on:click="getTasks(milestone.id)" >
     <template v-slot:activator>
       <v-list-item-title v-text="milestone.title"></v-list-item-title>
     </template>
+
     <v-progress-linear color="blue" height="10" value="10"></v-progress-linear>
     <v-progress-linear height="10" value="45" color="yellow"></v-progress-linear>
-    <!-- <v-list v-for="item in this.tasks" :key="item.id" flat subheader two-line>
+    <v-list v-for="item in test1" :key="item.id" flat subheader two-line>
       <Task :id="item.id" :title="item.title" :due="item.due" :link="item.link" :page="item.page"> </Task>
-    </v-list> -->
+    </v-list>
     <v-btn fab @click="toggleAddTask === false" v-if="toggleAddTask">
 
       <v-icon>
@@ -34,7 +36,7 @@
 </div>
 </template>
 <script>
-import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -49,26 +51,37 @@ export default {
       email: "",
       toggleAddTask: false,
       tasks: "",
-      milestones: ""
+      milestones: "",
+      test1: []
     }
   },
   methods: {
     submitEditor() {
       return this.toggleAddTask === true
+    },
+    test(){
+      console.log("hello")
+    },
+    getTasks(e){
+      this.test1 = this.$store.getters.getTaskFromGoal(e)
     }
   },
   mounted() {
-    axios.get('http://localhost:3005/task-post-goals-get',{
-      headers: {
-        'goal_id': this.goalId.id
-      }
+    this.$store.dispatch('getGoalMemberInfo', {header:this.goalId.id})
+this.$store.dispatch('getTaskInfo')
 
 
-    })
-      .then((res) => {
-    console.log(res.data);
-      })
+}
+,
+computed: {
 
+    getMember() {
+
+
+      const storeMembers = this.$store.state.goalMember
+      return storeMembers;
+
+    }
   }
 
 }
